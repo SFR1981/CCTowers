@@ -33,12 +33,15 @@ public class Guest {
     }
 
     public void checkOutOf(Room oldRoom){
-        room.remove(oldRoom);
+        if (room.size() == 1) {
+            room.remove(oldRoom);
+        }
     }
 
     public void checkedInto(Room newRoom){
-        room.add(newRoom);
-
+        if (room.size() == 1) {
+            room.add(newRoom);
+        }
 
     }
 
