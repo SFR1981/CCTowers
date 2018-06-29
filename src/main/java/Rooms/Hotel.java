@@ -102,6 +102,23 @@ public class Hotel {
 
     }
 
+    public String getVacantRooms(){
+        ArrayList<String> vacantRooms = new ArrayList<>();
+        for (BedRoom room : bedRooms){
+            if (room.getGuestnumber() == 0){
+                String name = room.getName();
+                vacantRooms.add(name);
+            }
+        }
+        String vacancies = String.join(", " , vacantRooms);
+        if (vacantRooms.isEmpty()){
+            return "no vacancies";
+        }
+        else {
+            return "available rooms: " + vacancies;
+        }
+    }
+
 
 
 

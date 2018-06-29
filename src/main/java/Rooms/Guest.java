@@ -1,12 +1,14 @@
 package Rooms;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Guest {
 
     private String name;
     private int wallet;
     private ArrayList<Room> room;
+
 
     public Guest(String name){
         this.name = name;

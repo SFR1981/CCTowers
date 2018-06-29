@@ -13,6 +13,7 @@ public class HotelTest {
     Guest guest;
     Guest guest2;
     Guest guest3;
+    Guest guest4;
     Hotel hotel;
     BedRoom bedRoom;
     DiningRoom diningRoom;
@@ -24,6 +25,7 @@ public class HotelTest {
         guest = new Guest("Harry");
         guest2 = new Guest("Sheila");
         guest3 = new Guest("Bobo");
+        guest4 = new Guest("Jess");
         bedRoom = new BedRoom("1", 2, RoomType.DOUBLE);
         diningRoom = new DiningRoom("Little Chef", 50);
         conferenceRoom = new ConferenceRoom("function suite", 30, 150);
@@ -125,6 +127,37 @@ public class HotelTest {
         hotel.checkGuestInto(guest, bedRoom);
         hotel.checkGuestInto(guest2, bedRoom);
         assertEquals("room contains Harry ,Sheila", hotel.getGuestsInRoom(bedRoom));
+        System.out.println(hotel.getTill());
+
+    }
+
+    @Test
+    public void canSeeListVacantBedrooms(){
+        hotel.addBedRooms(bedRoom);
+        BedRoom bedRoom2 = new BedRoom("2",2,RoomType.DOUBLE);
+        BedRoom bedRoom3 = new BedRoom("3",2,RoomType.DOUBLE);
+        BedRoom bedRoom4 = new BedRoom("4",1,RoomType.SINGLE);
+        BedRoom bedRoom5 = new BedRoom("5",4,RoomType.FAMILY);
+        BedRoom bedRoom6 = new BedRoom("237",4,RoomType.FAMILY);
+        hotel.addBedRooms(bedRoom2);
+        hotel.addBedRooms(bedRoom3);
+        hotel.addBedRooms(bedRoom4);
+        hotel.addBedRooms(bedRoom5);
+        hotel.addBedRooms(bedRoom6);
+        hotel.checkGuestInto(guest, bedRoom);
+        hotel.checkGuestInto(guest2, bedRoom);
+        hotel.checkGuestInto(guest3, bedRoom4);
+        hotel.checkGuestInto(guest4, bedRoom5);
+        assertEquals("available rooms: 2, 3, 237", hotel.getVacantRooms());
+
+    }
+
+    @Test
+    public void noVacancies(){
+        BedRoom bedRoom6 = new BedRoom("237",4,RoomType.FAMILY);
+        hotel.addBedRooms(bedRoom6);
+        hotel.checkGuestInto(guest, bedRoom6);
+        assertEquals("no vacancies", hotel.getVacantRooms());
 
     }
 
