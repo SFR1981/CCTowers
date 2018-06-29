@@ -11,6 +11,8 @@ import static org.junit.Assert.*;
 
 public class HotelTest {
     Guest guest;
+    Guest guest2;
+    Guest guest3;
     Hotel hotel;
     BedRoom bedRoom;
     DiningRoom diningRoom;
@@ -20,6 +22,8 @@ public class HotelTest {
     public void before(){
         hotel = new Hotel();
         guest = new Guest("Harry");
+        guest2 = new Guest("Sheila");
+        guest3 = new Guest("Bobo");
         bedRoom = new BedRoom("1", 2, RoomType.DOUBLE);
         diningRoom = new DiningRoom("Little Chef", 50);
         conferenceRoom = new ConferenceRoom("function suite", 30, 150);
@@ -75,6 +79,7 @@ public class HotelTest {
 
     @Test
     public void canCheckGuestIntoRoom(){
+        hotel.addConferenceRooms(conferenceRoom);
         hotel.checkGuestInto(guest, conferenceRoom);
         assertEquals(1,conferenceRoom.getGuestnumber());
         assertEquals(150 , guest.getWallet());
@@ -83,7 +88,47 @@ public class HotelTest {
     }
 
     @Test
-    public void canCheckGuestOutOfRoom(){
+    public void cantCheckTooManyIntoRoom(){
+        hotel.addBedRooms(bedRoom);
+        hotel.checkGuestInto(guest, bedRoom);
+        hotel.checkGuestInto(guest2, bedRoom);
+        hotel.checkGuestInto(guest3, bedRoom);
+        assertEquals("error: not checked into a room", guest3.whatRoom());
+        assertEquals(2, bedRoom.getGuestnumber());
+    }
+
+    @Test
+    public void cantCheckGuestOutOfRoom(){
+        hotel.checkGuestOutOfRoom(guest, conferenceRoom);
+        assertEquals(0, conferenceRoom.getGuestnumber());
 
     }
+
+    @Test
+    public void canCheckGuestOutOfRoom(){
+        hotel.addBedRooms(bedRoom);
+        hotel.checkGuestInto(guest, bedRoom);
+        hotel.checkGuestOutOfRoom(guest, bedRoom);
+        assertEquals(0, bedRoom.getGuestnumber());
+        assertEquals("error: not checked into a room", guest.whatRoom());
+    }
+
+    @Test
+    public void canGetListWhenRoomEmpty(){
+        hotel.addBedRooms(bedRoom);
+        assertEquals("room contains nobody",hotel.getGuestsInRoom(bedRoom));
+    }
+
+    @Test
+    public void canGetListWhenRoomOccupied(){
+        hotel.addBedRooms(bedRoom);
+        hotel.checkGuestInto(guest, bedRoom);
+        hotel.checkGuestInto(guest2, bedRoom);
+        assertEquals("room contains Harry ,Sheila", hotel.getGuestsInRoom(bedRoom));
+
+    }
+
+
+
+
 }

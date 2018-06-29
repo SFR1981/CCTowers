@@ -83,7 +83,23 @@ public class Hotel {
     public void checkGuestOutOfRoom(Guest guest, Room room){
         if (room.getGuests().contains(guest)){
             room.checkOut(guest);
+            guest.checkOutOf(room);
         }
+
+    }
+
+
+    public String getGuestsInRoom(Room room){
+        ArrayList<String> guests = new ArrayList<>();
+        for (Guest guest : room.getGuests()){
+            guests.add(guest.getName());
+        }
+        if (guests.isEmpty()) {
+            guests.add("nobody");
+        }
+        String guestString = String.join(" ,", guests);
+        return "room contains "+ guestString;
+
     }
 
 
