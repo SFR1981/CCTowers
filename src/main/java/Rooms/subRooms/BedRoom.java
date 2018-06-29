@@ -23,4 +23,7 @@ public class BedRoom extends Room {
         }
     }
 
+    public int getRate() {
+        return rate;
+    }
 }

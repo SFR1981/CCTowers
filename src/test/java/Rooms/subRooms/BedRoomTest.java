@@ -59,4 +59,9 @@ public class BedRoomTest {
     public void cantGetWhoBookedRoom(){
         assertEquals("room is vacant", bedRoom.bookedBy());
     }
+
+    @Test
+    public void canGetRate(){
+        assertEquals(80, bedRoom.getRate());
+    }
 }

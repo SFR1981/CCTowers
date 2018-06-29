@@ -1,6 +1,7 @@
 package Rooms.subRooms;
 
 import Rooms.Guest;
+import Rooms.subRooms.BedRoom;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -10,11 +11,13 @@ public class DiningRoomTest {
 
     DiningRoom restaurant;
     Guest guest;
+    BedRoom bedroom;
 
     @Before
     public void before(){
         restaurant = new DiningRoom("Vino", 50);
         guest = new Guest("Barry");
+        bedroom = new BedRoom("123",2, RoomType.DOUBLE);
     }
 
     @Test
@@ -43,5 +46,12 @@ public class DiningRoomTest {
         restaurant.checkIn(guest);
         restaurant.checkOut(guest);
         assertEquals(0, restaurant.getGuestnumber());
+    }
+
+    @Test
+    public void roomsAreIndependent(){
+        restaurant.checkIn(guest);
+        bedroom.checkIn(guest);
+        assertEquals(1, restaurant.getGuestnumber());
     }
 }
