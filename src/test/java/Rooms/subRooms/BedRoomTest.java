@@ -64,4 +64,19 @@ public class BedRoomTest {
     public void canGetRate(){
         assertEquals(80, bedRoom.getRate());
     }
+
+
+    @Test
+    public void canGetBookedUntil(){
+        assertEquals(null, bedRoom.bookedUntil);
+    }
+
+    @Test
+    public void canBookForTwoNights(){
+
+    }
+
+
+
+
 }

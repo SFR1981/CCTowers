@@ -4,6 +4,7 @@ import Rooms.subRooms.BedRoom;
 import Rooms.subRooms.ConferenceRoom;
 import Rooms.subRooms.DiningRoom;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class Hotel {
@@ -77,6 +78,13 @@ public class Hotel {
         }
 
         }
+
+    }
+
+
+    public void checkGuestIntoBedRoomForStayLength(Guest guest, BedRoom room, int stay_length ){
+        checkGuestInto(guest, room);
+
 
     }
 
