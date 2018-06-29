@@ -38,9 +38,14 @@ public class Guest {
         }
     }
 
-    public void checkedInto(Room newRoom){
-        if (room.size() == 1) {
+    public void checkInto(Room newRoom){
             room.add(newRoom);
+
+    }
+
+    public void pays(int rate){
+        if (this.wallet >= rate) {
+            this.wallet -= rate;
         }
 
     }
