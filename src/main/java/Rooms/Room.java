@@ -37,7 +37,9 @@ public abstract class Room {
         }
     }
 
+    public abstract int getRate();
 
-
-
+    public ArrayList<Guest> getGuests() {
+        return guests;
+    }
 }

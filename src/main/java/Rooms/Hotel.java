@@ -28,6 +28,14 @@ public class Hotel {
         return conferenceRooms.size();
     }
 
+    public int getTill(){
+        return till;
+    }
+
+    public void payTill(int rate){
+        till += rate;
+    }
+
     public int getDiningRooms(){
         return diningRooms.size();
     }
@@ -56,6 +64,26 @@ public class Hotel {
     }
     public void removeConferenceRoom(ConferenceRoom room){
         conferenceRooms.remove(room);
+    }
+
+    public void checkGuestInto(Guest guest, Room room){
+        if (conferenceRooms.contains(room)|| diningRooms.contains(room) || (bedRooms.contains(room))){
+        if (room.getGuestnumber() < room.getCapacity()) {
+            int rate = room.getRate();
+            guest.pays(rate);
+            this.payTill(rate);
+            guest.checkInto(room);
+            room.checkIn(guest);
+        }
+
+        }
+
+    }
+
+    public void checkGuestOutOfRoom(Guest guest, Room room){
+        if (room.getGuests().contains(guest)){
+            room.checkOut(guest);
+        }
     }
 
 
