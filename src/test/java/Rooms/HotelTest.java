@@ -7,6 +7,11 @@ import Rooms.subRooms.RoomType;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.sql.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+
 import static org.junit.Assert.*;
 
 public class HotelTest {
@@ -159,6 +164,23 @@ public class HotelTest {
         hotel.checkGuestInto(guest, bedRoom6);
         assertEquals("no vacancies", hotel.getVacantRooms());
 
+    }
+
+    @Test
+    public void cantAffordToBookForThreeNights(){
+        BedRoom bedRoom6 = new BedRoom("237",4,RoomType.FAMILY);
+        hotel.addBedRooms(bedRoom6);
+        hotel.checkGuestIntoBedRoomForStayLength(guest2, bedRoom6, 3);
+        System.out.println(bedRoom6.getBookedUntil());
+
+    }
+
+    @Test
+    public void canBookForTwoNights(){
+        hotel.addBedRooms(bedRoom);
+        hotel.checkGuestIntoBedRoomForStayLength(guest, bedRoom, 2);
+        System.out.println(bedRoom.getBookedUntil());
+        assertEquals(Date.from(Instant.now().plusSeconds(86400*2).truncatedTo(ChronoUnit.DAYS)), bedRoom.getBookedUntil());
     }
 
 

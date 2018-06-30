@@ -4,6 +4,9 @@ import Rooms.Guest;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.time.Instant;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 public class BedRoomTest {
@@ -71,10 +74,12 @@ public class BedRoomTest {
         assertEquals(null, bedRoom.bookedUntil);
     }
 
-    @Test
-    public void canBookForTwoNights(){
-
-    }
+//    @Test
+//    public void canBookForTwoNights(){
+//        bedRoom.updateBooking(2);
+//        assert("Sun Jul 01 16:49:47 BST 2018", bedRoom.getBookedUntil());
+//
+//    }
 
 
 

@@ -4,6 +4,7 @@ import Rooms.Guest;
 import Rooms.Room;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 public class BedRoom extends Room {
@@ -32,14 +33,16 @@ public class BedRoom extends Room {
         return rate;
     }
 
-    public Date bookedUntil(){
+    public Date getBookedUntil(){
         return bookedUntil;
     }
 
     public void updateBooking(int stay_length){
-        int stay_length_seconds = stay_length * (864000);
-        Instant expiration = Instant.now().plusSeconds(stay_length_seconds);
-        this.bookedUntil = Date.from(expiration);
+        int stay_length_seconds = stay_length * (86400);
+        Instant expiration = Instant.now().plusSeconds(stay_length_seconds).truncatedTo(ChronoUnit.DAYS);
+        Date leaving_date = Date.from(expiration);
+        this.bookedUntil = leaving_date;
+
 
     }
 

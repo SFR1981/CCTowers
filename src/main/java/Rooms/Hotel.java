@@ -83,8 +83,13 @@ public class Hotel {
 
 
     public void checkGuestIntoBedRoomForStayLength(Guest guest, BedRoom room, int stay_length ){
-        checkGuestInto(guest, room);
-
+        if (guest.getWallet() >= (room.getRate()*stay_length)) {
+            this.checkGuestInto(guest, room);
+            room.updateBooking(stay_length);
+            int charge = stay_length - 1; //checking in charges for one night
+            guest.pays(charge);
+            this.payTill(charge);
+        }
 
     }
 
