@@ -171,7 +171,7 @@ public class HotelTest {
         BedRoom bedRoom6 = new BedRoom("237",4,RoomType.FAMILY);
         hotel.addBedRooms(bedRoom6);
         hotel.checkGuestIntoBedRoomForStayLength(guest2, bedRoom6, 3);
-        System.out.println(bedRoom6.getBookedUntil());
+        assertNull(bedRoom6.getBookedUntil());
 
     }
 

@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 import static org.junit.Assert.*;
@@ -74,12 +75,12 @@ public class BedRoomTest {
         assertEquals(null, bedRoom.bookedUntil);
     }
 
-//    @Test
-//    public void canBookForTwoNights(){
-//        bedRoom.updateBooking(2);
-//        assert("Sun Jul 01 16:49:47 BST 2018", bedRoom.getBookedUntil());
-//
-//    }
+    @Test
+    public void canBookForTwoNights(){
+        bedRoom.updateBooking(2);
+        assertEquals(Date.from(Instant.now().plusSeconds(86400*2).truncatedTo(ChronoUnit.DAYS)), bedRoom.getBookedUntil());
+
+    }
 
 
 
